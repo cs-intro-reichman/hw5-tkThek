@@ -22,7 +22,6 @@ public class Scrabble {
 
 	// Actual number of words in the dictionary (set by the init function, below)
 	static int NUM_OF_WORDS;
-	//
 
 	// Populates the DICTIONARY array with the lowercase version of all the words read
 	// from the WORDS_FILE, and sets NUM_OF_WORDS to the number of words read from the file.
