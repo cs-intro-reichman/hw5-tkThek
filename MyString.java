@@ -1,3 +1,4 @@
+
 /**
  * A library of string functions.
  */
@@ -7,7 +8,15 @@ public class MyString {
         System.out.println(countChar(hello, 'h'));
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
+        System.out.println(subsetOf("sap", "space"));
+        System.out.println(subsetOf("sss", "space"));
+        System.out.println(subsetOf("se", "space" ));
         System.out.println(spacedString(hello));
+        System.out.println(randomStringOfLetters(2));
+        System.out.println(randomStringOfLetters(5));
+        System.out.println((char) ('a' + (int) (Math.random() * 26)));
+        System.out.println(remove("meet", "committee"));
+        System.out.println(insertRandomly('a', "string"));
         //// Put your other tests here.
     }
 
@@ -20,8 +29,13 @@ public class MyString {
      * @return the number of times c appears in str
      */
     public static int countChar(String str, char ch) {
-        //// Replace the following statement with your code
-        return 0;
+        int count = 0;
+        for (char c : str.toCharArray()) {
+            if (c == ch) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /** Returns true if str1 is a subset string str2, false otherwise
@@ -36,9 +50,26 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-         //// Replace the following statement with your code
-        return false;
+        if (str1.isEmpty()) {
+            return true;
+        }
+        str1 = str1.toLowerCase();
+        str2 = str2.toLowerCase();
+
+        int[] charCount = new int[256];
+        for (char c : str2.toCharArray()) {
+            charCount[c]++;
+        }
+        for (char c : str1.toCharArray()) {
+            if (charCount[c] <= 0) {
+                return false;
+            }
+            charCount[c]--;
+        }
+
+        return true;
     }
+
 
     /** Returns a string which is the same as the given string, with a space
      * character inserted after each character in the given string, except
@@ -49,8 +80,26 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        //// Replace the following statement with your code
-        return null;
+        char[] strArr = str.toCharArray();
+        char[] arr = new char[2 * str.length() - 1];
+
+        if (str.isEmpty()) {
+            return " ";
+        }
+
+        int i = 0;
+        int j = 0;
+
+        while (i < arr.length) {
+            arr[i] = strArr[j];
+            if (i < arr.length - 1) {
+                arr[i + 1] = ' ';
+            }
+            i+=2;
+            j++;
+        }
+
+        return new String(arr);
     }
   
     /**
@@ -64,8 +113,13 @@ public class MyString {
      * @return a randomly generated string, consisting of 'n' lowercase letters
      */
     public static String randomStringOfLetters(int n) {
-        //// Replace the following statement with your code
-        return null;
+        char[] resultArr = new char[n];
+
+        for (int i = 0; i < resultArr.length; i++) {
+            resultArr[i] = (char) ('a' + (int) (Math.random() * 26));
+        }
+
+        return new String(resultArr);
     }
 
     /**
@@ -78,8 +132,21 @@ public class MyString {
      * @return a string consisting of str1 minus all the characters of str2
      */
     public static String remove(String str1, String str2) {
-       //// Replace the following statement with your code
-        return null;
+        str1 = str1.toLowerCase();
+        str2 = str2.toLowerCase();
+        String result = str2;
+
+        int[] charCount = new int[256];
+        for (char c : str2.toCharArray()) {
+            charCount[c]++;
+        }
+
+        for (char c : str1.toCharArray()) {
+            if (charCount[c] >= 0) {
+                result = result.replaceFirst(String.valueOf(c), "");
+            }
+        }
+        return result;
     }
 
     /**
